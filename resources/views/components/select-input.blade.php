@@ -1,20 +1,26 @@
-<div>
-    @isset($label)
-        <label for="{{ $name }}" class="block font-medium text-sm text-gray-700">{{ $label }}</label>
-    @endisset
+@if($label)
+    <label for="{{ $id ?? $name }}" class="block text-sm font-medium text-gray-700 mb-1">
+        {{ $label }}
+    </label>
+@endif
 
-    <select
-        name="{{ $name }}"
-        id="{{ $name }}"
-        {{ $attributes->merge(['class' => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md']) }}
-    >
-        <option value="">-- Seleccione --</option>
-        @foreach ($options as $key => $optionValue)
-            <option value="{{ $key }}" @if (old($name, $value) == $key) selected @endif>{{ $optionValue }}</option>
-        @endforeach
-    </select>
+<select 
+    @if($wireModel) wire:model="{{ $wireModel }}" @endif 
+    name="{{ $name }}" 
+    id="{{ $id ?? $name }}" 
+    class="block mt-1 w-full rounded-lg border-gray-300 @error($name) border-red-500 @enderror"
+>
+    <option value="" {{ $selected === null || $selected === '' ? 'selected' : '' }}>
+        Seleccione una opción
+    </option>
+    
+    @foreach($options as $key => $labelItem)
+        <option value="{{ $key }}" {{ $selected == $key ? 'selected' : '' }}>
+            {{ $labelItem }}
+        </option>
+    @endforeach
+</select>
 
-    @error($name)
-        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-    @enderror
-</div>
+@error($name)
+    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+@enderror
