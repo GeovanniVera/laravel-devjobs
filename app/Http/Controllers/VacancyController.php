@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Vacancy;
+use Illuminate\Support\Facades\Gate;
 
 class VacancyController extends Controller
 {
@@ -20,7 +22,7 @@ class VacancyController extends Controller
     public function create()
     {
         return view('vacancies.create',);
-        
+
     }
 
     /**
@@ -42,9 +44,10 @@ class VacancyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Vacancy $vacancy)
     {
-        //
+        Gate::authorize('update', $vacancy);
+        return view('vacancies.edit',['vacancy'=>$vacancy]);
     }
 
     /**

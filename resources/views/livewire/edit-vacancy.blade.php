@@ -1,8 +1,8 @@
-<form novalidate class="md:w-1/2 space-y-8  md:p-6 md:bg-white rounded-lg" wire:submit.prevent="createVacancy"
+<form novalidate class="md:w-1/2 space-y-8  md:p-6 md:bg-white rounded-lg" wire:submit.prevent="updateVacancy"
     enctype="multipart/form-data">
 
     <!-- Title Form -->
-    <h1 class="text-2xl font-bold text-center mb-10 my-10">Publicar Vacante</h1>
+    <h1 class="text-2xl font-bold text-center mb-10 my-10">Editar Vacante:</h1>
 
 
     <!-- Title -->
@@ -44,7 +44,7 @@
     <div class="mt-4">
         <x-input-label for="description" :value="__('Descripciòn de la vacante')" />
         <textarea id="description" wire:model="description"
-            class="block mt-1 w-full h-48 resize-none rounded-md border-gray-300 shadow-sm 
+            class="block mt-1 w-full h-48 resize-none rounded-md border-gray-300 shadow-sm
                focus:border-indigo-500 focus:ring-indigo-500 transition duration-150">{{ old('description') }}</textarea>
         <x-input-error :messages="$errors->get('company')" class="mt-2" />
     </div>
@@ -60,13 +60,21 @@
                 </path>
             </svg>
             <span>Seleccionar archivo</span>
-            <input id="image" type="file" wire:model="image" class="sr-only">
+            <input id="image" type="file" wire:model="newImage" class="sr-only">
         </label>
 
         <div class="my-5 w-96">
+            <!-- Preview de la imagen -->
             @if ($image)
-                Imagen:
-                <img src="{{ $image->temporaryUrl() }}" alt="">
+                <x-input-label :value="__('Vista previa de la imagen : ')" />
+                <img src="{{ asset('storage/' . $image) }}" alt="Imagen de la vacante {{ $title }}"
+                    >
+            @endif
+        </div>
+        <div class="my-5 w-96">
+            @if ($newImage)
+                Imagen Nueva:
+                <img src="{{ $newImage->temporaryUrl() }}" alt="">
             @endif
         </div>
 
