@@ -83,7 +83,7 @@
 
     <!--Submit Button-->
     <x-primary-button class="w-full mr-auto mt-5">
-        {{ __('Crear Vacante') }}
+        {{ __('Editar Vacante') }}
     </x-primary-button>
 
 </form>

@@ -6,10 +6,12 @@ use App\Models\Vacancy;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class ShowVacancies extends Component
+class DeleteVacancy extends Component
 {
 
-    protected $listeners = [
+    public $vacancy;
+
+     protected $listeners = [
         'confirmDeleteVacancy' => 'deleteVacancy',
     ];
 
@@ -22,15 +24,8 @@ class ShowVacancies extends Component
         $vacancy->delete();
         $this->dispatch('vacancyDeleted');
     }
-
     public function render()
     {
-
-        $data = Vacancy::where('user_id', Auth::user()->id)->paginate(10);
-
-
-        return view('livewire.show-vacancies', [
-            'vacancies' => $data
-        ]);
+        return view('livewire.delete-vacancy');
     }
 }

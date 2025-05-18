@@ -13,13 +13,27 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Geovanni Vera',
-            'email' => 'geovanni.vera23@gmail.com',
-            'password' => bcrypt('Vera230901@'),
-            'role' => '1',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+
+        $users = [
+            [
+                'name' => 'Geovanni Vera',
+                'email' => 'geovanni.vera23@gmail.com',
+                'password' => bcrypt('Vera230901@'),
+                'role' => '1', //developer
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => 'Elizabeth Vera',
+                'email' => 'elizabeth.vera23@gmail.com',
+                'password' => bcrypt('Vera230901@'),
+                'role' => '2',// recruiter
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]
+        ];
+
+
+        DB::table('users')->insert($users);
     }
 }
