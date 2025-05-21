@@ -12,8 +12,9 @@
 
                 <!-- Navigation Links -->
                 @auth
-                    @if (auth()->user()->role == 2)
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
+                        @if (auth()->user()->role == 2)
                             <x-nav-link :href="route('vacancies.index')" :active="request()->routeIs('vacancies.index')">
                                 {{ __('Inicio') }}
                             </x-nav-link>
@@ -21,8 +22,11 @@
                             <x-nav-link :href="route('vacancies.create')" :active="request()->routeIs('vacancies.create')">
                                 {{ __('Crear Vacante') }}
                             </x-nav-link>
-                        </div>
-                    @endif
+                        @endif
+                        <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                            {{ __('Notificaciones') }}
+                        </x-nav-link>
+                    </div>
                 @endauth
                 @guest
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -96,17 +100,19 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-                @if (auth()->user()->role == 2)
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class=" sm:-my-px sm:ms-10 sm:flex">
+                    @if (auth()->user()->role == 2)
                         <x-responsive-nav-link :href="route('vacancies.index')" :active="request()->routeIs('vacancies.index')">
                             {{ __('Inicio') }}
                         </x-responsive-nav-link>
                         <x-responsive-nav-link :href="route('vacancies.create')" :active="request()->routeIs('vacancies.create')">
                             {{ __('Crear Vacante') }}
                         </x-responsive-nav-link>
-                    </div>
-                @endif
-
+                    @endif
+                    <x-responsive-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                        {{ __('Notificaciones') }}
+                    </x-responsive-nav-link>
+                </div>
             @endauth
             @guest
                 <x-responsive-nav-link :href="route('login')">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationCotroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,8 @@ Route::get('/dashboard',[VacancyController::class, 'index'] )->middleware(['auth
 Route::get('/vacancy/create',[VacancyController::class, 'create'] )->middleware(['auth', 'verified'])->name('vacancies.create');
 Route::get('/vacancy/{vacancy}/edit',[VacancyController::class, 'edit'] )->middleware(['auth', 'verified'])->name('vacancies.edit');
 Route::get('/vacancy/{vacancy}',[VacancyController::class, 'show'] )->name('vacancies.show');
+//Notificaciones
+Route::get('/notifications',[NotificationCotroller::class,'__invoke'] )->middleware(['auth', 'verified'])->name('notifications.index');
 
 
 Route::middleware('auth')->group(function () {

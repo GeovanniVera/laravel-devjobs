@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Candidate;
 use App\Models\Vacancy;
+use App\Notifications\NewCandidate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -61,6 +62,9 @@ class PostulateVacancy extends Component
             'cv' => $data['cv'],
         ]);
 
+        // Enviar notificación al reclutador
+        $this->vacancy->reclutiers->notify(new NewCandidate($this->vacancy->id, $this->vacancy->title, Auth::id()));
+        //
         session()->flash('message', 'Postulación exitosa.');
         redirect()->back();
     }
