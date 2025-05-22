@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Animacion --}}
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg shadow-xl">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden  sm:rounded-lg shadow-xl">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
                     <h1 class="text-4xl font-bold mb-5">Notificaciones</h1>
 
@@ -18,10 +18,11 @@
                                 {{ $notification->data['message'] }}</p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 {{ $notification->data['vacancy_title'] }}</p>
+
                             <p class="text-sm text-gray-500 dark:text-gray-400 mb-5">
                                 {{ $notification->created_at->diffForHumans() }}</p>
-                            @if ($notification->data['url'])
-                                <a href="{{ $notification->data['url'] }}"
+                            @if ($notification->data['vacancy_id'])
+                                <a href="{{ route('candidates.index', $notification->data['vacancy_id']) }}"
                                     class="text-sm transition-all duration-300 bg-blue-500 hover:bg-blue-900 dark:bg-blue-400 dark:hover:bg-blue-300  py-2 px-4 rounded-lg text-white shadow-lg">Ver
                                     Candidato</a>
                             @endif

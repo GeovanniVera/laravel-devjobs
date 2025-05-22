@@ -27,6 +27,7 @@
                 @error('cv')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
+
                 <button type="submit"
                     class="mt-4 bg-blue-600 hover:bg-blue-800 transition-all duration-500 text-white py-2 px-4 w-full rounded-md">Postular</button>
             </form>

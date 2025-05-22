@@ -13,7 +13,6 @@
                 <!-- Navigation Links -->
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-
                         @if (auth()->user()->role == 2)
                             <x-nav-link :href="route('vacancies.index')" :active="request()->routeIs('vacancies.index')">
                                 {{ __('Inicio') }}
@@ -22,10 +21,24 @@
                             <x-nav-link :href="route('vacancies.create')" :active="request()->routeIs('vacancies.create')">
                                 {{ __('Crear Vacante') }}
                             </x-nav-link>
+
+                            <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                                {{ __('Notificaciones') }}
+                                <span
+                                    class="ms-3 rounded-full text-white bg-red-700 dark:bg-red-400  w-5 h-5 text-center font-bold shadow-lg hover:-translate-y-2  transition-all duration-300 ease-in-out">
+                                    {{ Auth::user()->unreadNotifications->count() > 0 ? Auth::user()->unreadNotifications->count() : '0' }}
+                                </span>
+                            </x-nav-link>
+                        @else
+                            <x-nav-link :href="route('welcome')">
+                                {{ __('Inicio') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('home')">
+                                {{ __('Explorar Vacantes') }}
+                            </x-nav-link>
                         @endif
-                        <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
-                            {{ __('Notificaciones') }}
-                        </x-nav-link>
+
+
                     </div>
                 @endauth
                 @guest
@@ -108,10 +121,22 @@
                         <x-responsive-nav-link :href="route('vacancies.create')" :active="request()->routeIs('vacancies.create')">
                             {{ __('Crear Vacante') }}
                         </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                            {{ __('Notificaciones') }}
+                            <span
+                                class="ms-3 rounded-full text-red-700 dark:text-red-400 text-center font-bold shadow-lg hover:-translate-y-2  transition-all duration-300 ease-in-out">
+                                {{ Auth::user()->unreadNotifications->count() > 0 ? Auth::user()->unreadNotifications->count() : '0' }}
+                            </span>
+                        </x-responsive-nav-link>
+                    @else
+                        <x-responsive-nav-link :href="route('welcome')">
+                            {{ __('Inicio') }}
+                        </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('home')">
+                            {{ __('Explorar vacantes') }}
+                        </x-responsive-nav-link>
                     @endif
-                    <x-responsive-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
-                        {{ __('Notificaciones') }}
-                    </x-responsive-nav-link>
+
                 </div>
             @endauth
             @guest

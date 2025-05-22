@@ -24,6 +24,10 @@
                 </div>
             @endif
 
+            <h2 class="font-semibold text-2xl text-gray-800 mb-5  dark:text-gray-200 leading-tight">
+                {{ __('Mis Vacantes') }}
+            </h2>
+
             <livewire:show-vacancies />
         </div>
     </div>

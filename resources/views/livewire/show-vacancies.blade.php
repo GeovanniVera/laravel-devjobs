@@ -20,9 +20,11 @@
                 </div>
                 <div class="flex flex-col md:flex-row gap-3 md:items-center mt-5 md:mt-0">
                     {{-- Candidatos btn --}}
-                    <a href="#"
+                    <a href="{{ route('candidates.index', $vacancy->id) }}"
+                        {{-- wire:click="$emit('showCandidates',{{ $vacancy->id }})" --}}
+                        {{-- wire:click="$dispatch('showCandidates',{{ $vacancy->id }})" --}}
                         class="bg-gray-600 hover:bg-gray-800 text-white py-2 px-4 rounded-md text-xs font-bold text-center">
-                        Candidatos
+                        Candidatos <span class="text-gray-400">({{ $vacancy->candidates->count() }})</span>
                     </a>
                     {{-- Editar btn --}}
                     <a href="{{ route('vacancies.edit', $vacancy->id) }}"

@@ -26,13 +26,17 @@ class Vacancy extends Model
         return $this->belongsTo(Salary::class);
     }
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function candidates(): HasMany
     {
-        return $this->hasMany(Candidate::class);
+        return $this->hasMany(Candidate::class)->orderBy('created_at', 'desc');
     }
 
     public function reclutiers(): BelongsTo
